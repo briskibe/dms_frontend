@@ -6,8 +6,10 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {FlexLayoutModule} from "@angular/flex-layout";
 import {MaterialModule} from "./material.module";
-import {ReactiveFormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {AuthModule} from "./auth/auth.module";
+import {HttpClientModule} from "@angular/common/http";
+import {DashboardModule} from "./dashboard/dashboard.module";
 
 @NgModule({
   declarations: [
@@ -16,13 +18,15 @@ import {AuthModule} from "./auth/auth.module";
   imports: [
     BrowserModule,
     AppRoutingModule,
+    FormsModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
     FlexLayoutModule,
     MaterialModule,
-    AuthModule
+    AuthModule,
+    HttpClientModule,
+    DashboardModule
   ],
-  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
