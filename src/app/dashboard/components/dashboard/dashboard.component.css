@@ -1,26 +1,93 @@
-.example-container {
-  display: flex;
-  flex-direction: column;
+.div-dashboard {
+  height: 45vh;
+  background-color: black;
+  margin: 1rem;
+  font-weight: bold;
+  font-size: 32px;
+}
+
+.div-dashboard:hover {
+  cursor: pointer;
+  animation: animate1 1s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes animate1 {
+            from {
+              font-size: 32px;
+              background-color: black;
+            }
+
+            to {
+              font-size: 60px;
+              background-color: rgb(194, 24, 91);
+            }
+        }
+
+.first {
+  position: relative;
+  z-index: 1;
+}
+
+.first::before {
+  content: "";
+  background: url("../../../../assets/images/dog-1.jpeg") center center;
+  opacity: 0.5;
   position: absolute;
+  z-index: -1;
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
 }
 
-.example-is-mobile .example-toolbar {
-  position: fixed;
-  z-index: 2;
+.second {
+  position: relative;
+  z-index: 1;
 }
 
-h1.example-app-name {
-  margin-left: 8px;
+.second::before {
+  content: "";
+  background: url("../../../../assets/images/dog-2.jpeg") center center;
+  opacity: 0.5;
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
 }
 
-.example-sidenav-container {
-  flex: 1;
+.third {
+  position: relative;
+  z-index: 1;
 }
 
-.example-is-mobile .example-sidenav-container {
-  flex: 1 0 auto;
+.third::before {
+  content: "";
+  background: url("../../../../assets/images/dog-3.jpeg") center center;
+  opacity: 0.5;
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.fourth {
+  position: relative;
+  z-index: 1;
+}
+
+.fourth::before {
+  content: "";
+  background: url("../../../../assets/images/dog-4.jpeg") center center;
+  opacity: 0.5;
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
 }

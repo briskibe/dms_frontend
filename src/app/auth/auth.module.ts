@@ -5,7 +5,6 @@ import {MaterialModule} from "../material.module";
 import {AuthRoutingModule} from "./auth-routing.module";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {FlexModule} from "@angular/flex-layout";
-import {AuthService} from "./auth.service";
 
 
 @NgModule({
@@ -17,9 +16,6 @@ import {AuthService} from "./auth.service";
     FormsModule,
     ReactiveFormsModule,
     FlexModule,
-  ],
-  providers: [
-    AuthService
   ]
 })
 export class AuthModule { }

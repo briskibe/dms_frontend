@@ -1,0 +1,43 @@
+<h1 mat-dialog-title>Provjera udomljenja</h1>
+<div mat-dialog-content>
+
+  <p>
+    <mat-form-field appearance="standard">
+      <mat-label>Pas</mat-label>
+      <input matInput [(ngModel)]="data.dog" readonly>
+    </mat-form-field>
+  </p>
+
+  <p>
+    <mat-form-field appearance="standard">
+      <mat-label>Vlasnik</mat-label>
+      <input matInput [(ngModel)]="data.owner" readonly>
+    </mat-form-field>
+  </p>
+
+  <p>
+    <mat-form-field appearance="fill">
+      <mat-label>Datum intervencije</mat-label>
+      <input matInput [matDatepicker]="picker" [(ngModel)]="data.dateOfIntervention">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+  </p>
+
+  <p>
+    <mat-form-field appearance="standard">
+      <mat-label>Napomena</mat-label>
+      <input matInput [(ngModel)]="data.interventionNote">
+    </mat-form-field>
+  </p>
+
+  <p>
+      <mat-checkbox [(ngModel)]="data.closed">Zatvorena</mat-checkbox>
+  </p>
+
+</div>
+
+<div mat-dialog-actions>
+  <button mat-raised-button color="primary" (click)="onUpdateIntervention()">Ažuriraj provjeru udomljenja</button>
+  <button mat-raised-button color="accent" (click)="onClose()">Zatvori</button>
+</div>

@@ -1,0 +1,207 @@
+<h1 mat-dialog-title>Detalji</h1>
+<div mat-dialog-content>
+  <p>
+    <mat-form-field appearance="standard">
+      <mat-label>Opis</mat-label>
+      <input matInput [(ngModel)]="data.data.opisPsa" [disabled]="!data.isNew && !isEdit">
+    </mat-form-field>
+  </p>
+
+  <p>
+    <mat-form-field appearance="standard">
+      <mat-label>Čip</mat-label>
+      <mat-select [(ngModel)]="data.data.cip" name="cip" [disabled]="!data.isNew && !isEdit">
+        <mat-option [value]="true">Da</mat-option>
+        <mat-option [value]="false">Ne</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </p>
+
+  <p>
+    <mat-form-field appearance="standard">
+      <mat-label>Vlasnik / br. čipa</mat-label>
+      <input matInput [(ngModel)]="data.data.vlasnikCipa" [disabled]="!data.isNew  && !isEdit">
+    </mat-form-field>
+  </p>
+
+  <p>
+    <mat-form-field appearance="standard">
+      <mat-label>Stanje psa</mat-label>
+      <input matInput [(ngModel)]="data.data.stanjePsa" [disabled]="!data.isNew  && !isEdit">
+    </mat-form-field>
+  </p>
+
+  <p>
+    <mat-form-field appearance="standard">
+      <mat-label>Aktivnosti</mat-label>
+      <input matInput [(ngModel)]="data.data.aktivnosti" [disabled]="!data.isNew  && !isEdit">
+    </mat-form-field>
+  </p>
+
+  <p>
+    <mat-form-field appearance="standard">
+      <mat-label>Broj čipa</mat-label>
+      <input matInput [(ngModel)]="data.data.brCipa" [disabled]="!data.isNew  && !isEdit">
+    </mat-form-field>
+  </p>
+
+  <p>
+    <mat-form-field appearance="standard">
+      <mat-label>Ime</mat-label>
+      <input matInput [(ngModel)]="data.data.ime" [disabled]="!data.isNew  && !isEdit">
+    </mat-form-field>
+  </p>
+
+  <p>
+    <mat-form-field appearance="standard">
+      <mat-label>Udomljen</mat-label>
+      <mat-select [(ngModel)]="data.data.udomljen" name="cip" [disabled]="!data.isNew && !isEdit">
+        <mat-option [value]="true">Da</mat-option>
+        <mat-option [value]="false">Ne</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </p>
+
+  <p>
+    <mat-form-field appearance="fill">
+      <mat-label>Datum udomljenja</mat-label>
+      <input matInput [matDatepicker]="picker" [(ngModel)]="data.data.datumUdomljenja" [disabled]="!data.isNew  && !isEdit">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+  </p>
+
+  <p>
+    <mat-form-field appearance="standard">
+      <mat-label>Udomitelj</mat-label>
+      <input matInput [(ngModel)]="data.data.udomitelj" [disabled]="!data.isNew  && !isEdit">
+    </mat-form-field>
+  </p>
+
+  <p>
+    <mat-form-field appearance="standard">
+      <mat-label>Mjesto udomljenja</mat-label>
+      <input matInput [(ngModel)]="data.data.mjestoUdomljenja" [disabled]="!data.isNew  && !isEdit">
+    </mat-form-field>
+  </p>
+
+  <p>
+    <mat-form-field appearance="standard">
+      <mat-label>Preminuo</mat-label>
+      <mat-select [(ngModel)]="data.data.uginuo" name="cip" [disabled]="!data.isNew && !isEdit">
+        <mat-option [value]="true">Da</mat-option>
+        <mat-option [value]="false">Ne</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </p>
+
+  <p>
+    <mat-form-field appearance="fill">
+      <mat-label>Datum uginuća</mat-label>
+      <input matInput [matDatepicker]="picker1" [(ngModel)]="data.data.datumUginuca" [disabled]="!data.isNew  && !isEdit">
+      <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+      <mat-datepicker #picker1></mat-datepicker>
+    </mat-form-field>
+  </p>
+
+  <p>
+    <mat-form-field appearance="standard">
+      <mat-label>Lokacija</mat-label>
+      <input matInput [(ngModel)]="data.data.lokacija" [disabled]="!data.isNew  && !isEdit">
+    </mat-form-field>
+  </p>
+
+  <p>
+    <mat-form-field appearance="standard">
+      <mat-label>Kastriran</mat-label>
+      <mat-select [(ngModel)]="data.data.kastriran" name="cip" [disabled]="!data.isNew && !isEdit">
+        <mat-option [value]="true">Da</mat-option>
+        <mat-option [value]="false">Ne</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </p>
+
+  <p>
+    <mat-form-field appearance="standard">
+      <mat-label>Provjera udomljenja</mat-label>
+      <mat-select [(ngModel)]="data.data.provjeraUdomljenja" name="cip" [disabled]="!data.isNew && !isEdit">
+        <mat-option [value]="true">Da</mat-option>
+        <mat-option [value]="false">Ne</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </p>
+
+  <p>
+    <mat-form-field appearance="standard">
+      <mat-label>Provjera napomena</mat-label>
+      <input matInput [(ngModel)]="data.data.provjeraNapomena" [disabled]="!data.isNew  && !isEdit">
+    </mat-form-field>
+  </p>
+
+  <p>
+      <mat-form-field appearance="fill">
+        <mat-label>Datum provjere</mat-label>
+        <input matInput [matDatepicker]="picker2" [(ngModel)]="data.data.datumProvjere" [disabled]="!data.isNew  && !isEdit">
+        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+        <mat-datepicker #picker2></mat-datepicker>
+      </mat-form-field>
+  </p>
+
+  <p>
+    <mat-form-field appearance="standard">
+      <mat-label>X:</mat-label>
+      <input matInput type="number" [(ngModel)]="data.data.latitude" [disabled]="!data.isNew  && !isEdit">
+    </mat-form-field>
+  </p>
+
+  <p>
+    <mat-form-field appearance="standard">
+      <mat-label>Y:</mat-label>
+      <input matInput type="number" [(ngModel)]="data.data.longitude" [disabled]="!data.isNew  && !isEdit">
+    </mat-form-field>
+  </p>
+
+  <div *ngIf="!isUndefinedLatLng()">
+    <aol-map [width]="'100%'" [height]="'500px'">
+      <aol-view [zoom]="15">
+        <aol-coordinate [x]=+data.data.longitude [y]=+data.data.latitude [srid]="'EPSG:4326'"></aol-coordinate>
+      </aol-view>
+      <aol-layer-tile>
+        <aol-source-osm></aol-source-osm>
+      </aol-layer-tile>
+
+      <aol-layer-vector [opacity]="1">
+        <aol-source-vector>
+          <aol-feature>
+            <aol-geometry-point>
+              <aol-coordinate [x]=+data.data.longitude [y]=+data.data.latitude [srid]="'EPSG:4326'"></aol-coordinate>
+            </aol-geometry-point>
+            <aol-style>
+              <aol-style-circle [radius]="10">
+                <aol-style-stroke [color]="'black'" [width]="5"></aol-style-stroke>
+                <aol-style-fill [color]="'red'"></aol-style-fill>
+              </aol-style-circle>
+            </aol-style>
+          </aol-feature>
+        </aol-source-vector>
+      </aol-layer-vector>
+
+
+      <aol-interaction-default></aol-interaction-default>
+    </aol-map>
+  </div>
+
+  <div *ngIf="isUndefinedLatLng()">
+    <p>Nisu definirane koordinate za ispavan prikaz na kartama! Molim vas popunite navedena polja (možete koristiti https://www.latlong.net/convert-address-to-lat-long.html)</p>
+  </div>
+
+</div>
+
+<div mat-dialog-actions>
+  <button mat-raised-button color="primary" (click)="onCreateIntervention(data.data.id)" *ngIf="!data.isNew && !isEdit && !isUndefinedLatLng()">Kreiraj provjeru</button>
+  <button mat-raised-button color="primary" (click)="onEditMode()" *ngIf="!data.isNew && !isEdit">Uredi</button>
+  <button mat-raised-button color="primary" (click)="onUpdateData(false)" *ngIf="data.isNew || isEdit">Spremi</button>
+  <button mat-raised-button color="primary" (click)="onUpdateData(true)" *ngIf="data.isNew || isEdit">Spremi i zatvori</button>
+  <button mat-raised-button color="primary" (click)="onCancelUpdate()" *ngIf="data.isNew || isEdit">Odustani</button>
+  <button mat-raised-button color="accent" (click)="onClose()">Zatvori</button>
+</div>

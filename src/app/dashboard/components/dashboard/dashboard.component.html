@@ -1,20 +1,37 @@
-<div class="example-container" [class.example-is-mobile]="mobileQuery.matches">
-  <mat-toolbar color="primary" class="example-toolbar">
-    <button mat-icon-button (click)="snav.toggle()"><mat-icon>menu</mat-icon></button>
-    <h1 class="example-app-name">DMS</h1>
-  </mat-toolbar>
+<section class="dashboard" fxFlex fxLayout="row wrap" fxLayoutAlign="space-around center">
+  <div fxFlex.gt-md="45%" fxFlex.lt-lg="98%" class="div-dashboard first" fxFlex fxLayoutAlign="center center" routerLink="/adopted">
 
-  <mat-sidenav-container class="example-sidenav-container"
-                         [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
-    <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'"
-                 [fixedInViewport]="mobileQuery.matches" fixedTopGap="56">
-      <mat-nav-list>
-        <a mat-list-item routerLink="/login" (click)="logout()">Odjava</a>
-      </mat-nav-list>
-    </mat-sidenav>
+    <div class="content">
+      Udomljeni psi
+    </div>
 
-    <mat-sidenav-content>
-      <p *ngFor="let content of fillerContent">{{content}}</p>
-    </mat-sidenav-content>
-  </mat-sidenav-container>
-</div>
+  </div>
+
+
+  <div fxFlex.gt-md="45%" fxFlex.lt-md="98%" class="div-dashboard second" fxFlex fxLayoutAlign="center center" routerLink="/evidention">
+
+    <div class="content">
+      Evidencija pasa
+    </div>
+
+  </div>
+
+
+  <div fxFlex.gt-md="45%" fxFlex.lt-md="98%" class="div-dashboard third" fxFlex fxLayoutAlign="center center" routerLink="/interventions">
+
+    <div class="content">
+      Intervencije
+    </div>
+
+  </div>
+
+
+  <div fxFlex.gt-md="45%" fxFlex.lt-md="98%" class="div-dashboard fourth" fxFlex fxLayoutAlign="center center" routerLink="/nonadopted">
+
+    <div class="content">
+      Podaci o kastraciji
+    </div>
+
+  </div>
+</section>
+

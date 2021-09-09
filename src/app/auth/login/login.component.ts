@@ -19,12 +19,17 @@ export class LoginComponent implements OnInit {
   constructor(private authService: AuthService, private _snackbar: MatSnackBar, private router: Router) { }
 
   ngOnInit() {
+    if (this.authService.isUserAuthenticated()) {
+      this.router.navigate(['/dashboard']);
+    }
   }
 
   login() {
     if (this.loginForm.value) {
-      this.authService.executeJwtAuthenticationService(this.loginForm.value["username"], this.loginForm.value["password"])
+      this.authService.login(this.loginForm.value["username"], this.loginForm.value["password"])
         .subscribe((res) => {
+          localStorage.setItem('token', res.accessToken);
+          this.authService.setUserAuthenticated();
 
           this.router.navigate(['/dashboard']);
 

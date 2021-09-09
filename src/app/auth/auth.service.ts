@@ -1,59 +1,48 @@
 import {Injectable} from "@angular/core";
+import {User} from "firebase";
+import {AngularFireAuth} from "@angular/fire/auth";
+import {Router} from "@angular/router";
+import {MatSnackBar} from "@angular/material/snack-bar";
+import {from, Observable} from "rxjs";
+import UserCredential = firebase.auth.UserCredential;
+import {UserModel} from "./user.model";
 import {HttpClient} from "@angular/common/http";
-import {map} from "rxjs/operators";
-import {JWTToken} from "./JWTToken";
+import {tap} from "rxjs/operators";
+import {environment} from "../../environments/environment";
 
-@Injectable({
-  providedIn: "root"
-})
+@Injectable()
 export class AuthService {
-  BASE_PATH = 'http://localhost:8090/dms/login';
-  USER_NAME_SESSION_ATTRIBUTE_NAME = 'authenticatedUser';
+  user: User;
+  isAuthenticated = false;
 
-  public username: String;
-  public token: String;
+  private endpointPath = environment.endpointUrl;
 
-  constructor(private http: HttpClient) {}
-
-  executeJwtAuthenticationService(username, password) {
-    console.log(username);
-    return this.http.post(`${this.BASE_PATH}/generate-token`, {
-      username,
-      password
-    }).pipe(map((res: JWTToken) => {
-      this.username = username;
-      this.token = res.token;
-      this.registerSuccessfulLoginForJwt(username);
-    }));
+  constructor(public router: Router, private http: HttpClient) {
+    this.setUserAuthenticated();
   }
 
-  createJWTToken(token) {
-    return 'Bearer ' + token
-  }
-
-  registerSuccessfulLoginForJwt(username) {
-    sessionStorage.setItem(this.USER_NAME_SESSION_ATTRIBUTE_NAME, username)
-  }
-
-  registerSuccessfulLogin(username, password) {
-    sessionStorage.setItem(this.USER_NAME_SESSION_ATTRIBUTE_NAME, username)
+  login(username: string, password: string): Observable<UserModel> {
+    return this.http.post<UserModel>(this.endpointPath + "/api/auth/signin", { username: username, password: password }).pipe(
+      tap(user => {
+        this.isAuthenticated = true;
+      })
+    );
   }
 
   logout() {
-    sessionStorage.removeItem(this.USER_NAME_SESSION_ATTRIBUTE_NAME);
-    this.username = null;
-    this.token = null;
+    localStorage.removeItem('token');
+    this.isAuthenticated = false;
   }
 
-  isUserLoggedIn() {
-    let user = sessionStorage.getItem(this.USER_NAME_SESSION_ATTRIBUTE_NAME);
-    if (user === null) return false;
-    return true;
+  setUserAuthenticated() {
+    if (!this.isAuthenticated) {
+      if (localStorage.getItem("token")) {
+        this.isAuthenticated = true;
+      }
+    }
   }
 
-  getLoggedInUserName() {
-    let user = sessionStorage.getItem(this.USER_NAME_SESSION_ATTRIBUTE_NAME);
-    if (user === null) return '';
-    return user
+  isUserAuthenticated(): boolean {
+    return this.isAuthenticated;
   }
 }

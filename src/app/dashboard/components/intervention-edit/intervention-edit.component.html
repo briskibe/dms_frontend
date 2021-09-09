@@ -1,0 +1,117 @@
+<section fxFill fxLayout="row wrap">
+  <mat-card fxFlex.gt-md="50" fxFlex.lt-md="100">
+    <mat-card-header>
+      <mat-card-title>Kreiranje provjere udomljenja</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <form [formGroup]="interventionForm" fxLayout="column" (ngSubmit)="createIntervention()">
+
+        <mat-form-field appearance="standard">
+          <mat-label>Ime psa</mat-label>
+          <input matInput placeholder="Ime" formControlName="dog" readonly>
+        </mat-form-field>
+
+        <mat-form-field appearance="standard">
+          <mat-label>Udomitelj</mat-label>
+          <input matInput placeholder="Udomitelj" formControlName="owner" readonly>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Datum intervencije</mat-label>
+          <input matInput [matDatepicker]="picker" formControlName="dateOfIntervention">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field appearance="standard">
+          <mat-label>Napomena</mat-label>
+          <input matInput placeholder="Napomena" formControlName="interventionNote" disabled>
+        </mat-form-field>
+
+        <mat-checkbox [formControl]="closed">Zatvorena</mat-checkbox>
+
+        <br>
+
+        <mat-card>
+          <mat-card-subtitle>Dodatni psi za provjeru (klik na kartu za dodavanje)</mat-card-subtitle>
+          <mat-card-content>
+            <mat-chip-list>
+              <mat-chip *ngFor="let dogName of dogsForIntervention" [removable]="true" (removed)="removeDog(dogName)">
+                {{ dogName }}
+                <mat-icon matChipRemove>cancel</mat-icon>
+              </mat-chip>
+            </mat-chip-list>
+          </mat-card-content>
+        </mat-card>
+
+        <br>
+
+        <button mat-raised-button color="primary" type="submit" [disabled]="!interventionForm.valid">Kreiraj provjeru udomljenja</button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card fxFlex.gt-md="50" fxFlex.lt-md="100">
+    <mat-card-header>
+      <mat-card-title>Karta udomitelja</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <ng-container *ngIf="dataLoaded">
+        <mat-slide-toggle (change)="onSlideChange()" [(ngModel)]="showAll">Prikaži sve</mat-slide-toggle>
+        <mat-divider></mat-divider>
+        <br><br>
+
+        <aol-map [width]="'100%'" [height]="'100vh'" (onClick)="mapOnClick($event)">
+          <aol-view [zoom]="15">
+            <aol-coordinate [x]="+data.longitude" [y]="+data.latitude" [srid]="'EPSG:4326'"></aol-coordinate>
+          </aol-view>
+          <aol-layer-tile>
+            <aol-source-osm></aol-source-osm>
+          </aol-layer-tile>
+
+          <aol-layer-vector [opacity]="1">
+            <aol-source-vector>
+              <aol-feature>
+                <aol-geometry-point>
+                  <aol-coordinate [x]="+data.longitude" [y]="+data.latitude" [srid]="'EPSG:4326'"></aol-coordinate>
+                </aol-geometry-point>
+                <aol-style>
+                  <aol-style-circle [radius]="10">
+                    <aol-style-stroke [color]="'purple'" [width]="5"></aol-style-stroke>
+                    <aol-style-fill [color]="'blue'"></aol-style-fill>
+                    <aol-style-text [text]="data.ime" font="16px sans-serif" [offsetY]="-20"></aol-style-text>
+                  </aol-style-circle>
+                </aol-style>
+              </aol-feature>
+
+              <aol-feature *ngFor="let place of nearbyData" [id]="place.id">
+                <aol-geometry-point>
+                  <aol-coordinate [x]="+place.longitude" [y]="+place.latitude" [srid]="'EPSG:4326'"></aol-coordinate>
+                </aol-geometry-point>
+                <aol-style>
+                  <aol-style-circle [radius]="10">
+                    <aol-style-stroke [color]="'black'" [width]="5"></aol-style-stroke>
+                    <aol-style-fill [color]="place.provjeraUdomljenja ? 'green' : 'red'"></aol-style-fill>
+                    <aol-style-text [text]="place.ime" font="16px sans-serif" [offsetY]="-20"></aol-style-text>
+                  </aol-style-circle>
+                </aol-style>
+              </aol-feature>
+            </aol-source-vector>
+          </aol-layer-vector>
+
+
+          <aol-interaction-default></aol-interaction-default>
+        </aol-map>
+      </ng-container>
+
+      <ng-container *ngIf="!dataLoaded">
+        <div>
+          <mat-spinner></mat-spinner>
+        </div>
+      </ng-container>
+
+    </mat-card-content>
+  </mat-card>
+</section>

@@ -1,0 +1,166 @@
+<section>
+  <mat-tab-group (selectedTabChange)="loadData($event)">
+  <mat-tab label="Aktivne provjere udomljenja">
+
+    <mat-card>
+      <mat-card-title>Aktivne provjere udomljenja</mat-card-title>
+      <mat-card-content>
+        <mat-spinner style="margin:0 auto;" *ngIf="loadingActive"></mat-spinner>
+
+        <mat-table [dataSource]="dataActive" class="mat-elevation-z8" *ngIf="!loadingActive">
+
+          <!--- Note that these columns can be defined in any order.
+                The actual rendered columns are set as a property on the row definition" -->
+
+          <ng-container matColumnDef="dog">
+            <mat-header-cell *matHeaderCellDef>
+              Pas
+            </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              <span class="mobile-label">Pas:</span>
+              {{element.dog}}
+            </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="owner">
+            <mat-header-cell *matHeaderCellDef>
+              Udomitelj
+            </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              <span class="mobile-label">Udomitelj:</span>
+              {{element.owner}}
+            </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="dateOfIntervention">
+            <mat-header-cell *matHeaderCellDef>
+              Datum provjere
+            </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              <span class="mobile-label">Datum provjere:</span>
+              {{element.dateOfIntervention | date: 'mediumDate'}}
+            </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="interventionNote">
+            <mat-header-cell *matHeaderCellDef>
+              Napomena
+            </mat-header-cell>
+            <mat-cell mat-cell *matCellDef="let element">
+              <span class="mobile-label">Napomena:</span>
+              {{element.interventionNote}}
+            </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="closed">
+            <mat-header-cell *matHeaderCellDef>
+              Zatvorena
+            </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              <span class="mobile-label">Zatvoreno:</span>
+
+              <span *ngIf="element.closed">
+                <mat-icon>done</mat-icon>
+              </span>
+
+              <span *ngIf="!element.closed">
+                <mat-icon>clear</mat-icon>
+              </span>
+
+            </mat-cell>
+          </ng-container>
+
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;"
+              (click)="onRowSelected(row)"></mat-row>
+        </mat-table>
+      </mat-card-content>
+    </mat-card>
+
+  </mat-tab>
+  <mat-tab label="Zatvorene provjere udomljenja">
+
+    <mat-spinner *ngIf="loadingClosed"></mat-spinner>
+
+    <mat-card>
+      <mat-card-title>Zatvorene provjere udomljenja</mat-card-title>
+      <mat-card-content>
+
+        <mat-spinner style="margin:0 auto;" *ngIf="loadingActive"></mat-spinner>
+
+        <mat-table [dataSource]="dataClosed" *ngIf="!loadingActive" class="mat-elevation-z8">
+
+          <!--- Note that these columns can be defined in any order.
+                The actual rendered columns are set as a property on the row definition" -->
+
+          <ng-container matColumnDef="dog">
+            <mat-header-cell *matHeaderCellDef>
+              Pas
+            </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              <span class="mobile-label">Pas:</span>
+              {{element.dog}}
+            </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="owner">
+            <mat-header-cell *matHeaderCellDef>
+              Udomitelj
+            </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              <span class="mobile-label">Udomitelj:</span>
+              {{element.owner}}
+            </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="dateOfIntervention">
+            <mat-header-cell *matHeaderCellDef>
+              Datum provjere
+            </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              <span class="mobile-label">Datum provjere:</span>
+              {{element.dateOfIntervention | date: 'mediumDate'}}
+            </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="interventionNote">
+            <mat-header-cell *matHeaderCellDef>
+              Napomena
+            </mat-header-cell>
+            <mat-cell mat-cell *matCellDef="let element">
+              <span class="mobile-label">Napomena:</span>
+              {{element.interventionNote}}
+            </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="closed">
+            <mat-header-cell *matHeaderCellDef>
+              Zatvorena
+            </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              <span class="mobile-label">Zatvoreno:</span>
+
+              <span *ngIf="element.closed">
+                <mat-icon>done</mat-icon>
+              </span>
+
+              <span *ngIf="!element.closed">
+                <mat-icon>clear</mat-icon>
+              </span>
+
+            </mat-cell>
+          </ng-container>
+
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;"
+              (click)="onRowSelected(row)">
+          </mat-row>
+        </mat-table>
+      </mat-card-content>
+    </mat-card>
+
+  </mat-tab>
+</mat-tab-group>
+</section>
+
+

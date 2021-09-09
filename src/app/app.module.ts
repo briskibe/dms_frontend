@@ -10,6 +10,8 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {AuthModule} from "./auth/auth.module";
 import {HttpClientModule} from "@angular/common/http";
 import {DashboardModule} from "./dashboard/dashboard.module";
+import {environment} from "../environments/environment";
+import {AuthService} from "./auth/auth.service";
 
 @NgModule({
   declarations: [
@@ -22,11 +24,13 @@ import {DashboardModule} from "./dashboard/dashboard.module";
     BrowserAnimationsModule,
     ReactiveFormsModule,
     FlexLayoutModule,
+    FormsModule,
     MaterialModule,
     AuthModule,
     HttpClientModule,
     DashboardModule
   ],
+  providers: [AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

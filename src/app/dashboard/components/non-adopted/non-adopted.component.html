@@ -1,0 +1,135 @@
+<mat-card>
+  <mat-card-title>Podaci o kastraciji</mat-card-title>
+  <mat-card-content>
+    <mat-accordion>
+      <mat-expansion-panel hideToggle style="background-color: #c2185b; margin-bottom: 7px;">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Filter
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <mat-form-field appearance="fill">
+          <mat-label>Filter</mat-label>
+          <select matNativeControl [(ngModel)]="filter">
+            <option value="ime">Ime</option>
+            <option value="opispsa">Opis</option>
+            <option value="udomljen">Udomljen</option>
+            <option value="udomitelj">Udomitelj</option>
+            <option value="kastriran">Kastriran</option>
+          </select>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" style="margin-left: 2px" *ngIf="filter !== 'udomljen' && filter !== 'kastriran'">
+          <input matInput #filterValue (keyup)="updateFilters($event, filter)" placeholder="Vrijednost" *ngIf="filter !== 'uginuo' && filter !== 'udomljen'">
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" style="margin-left: 2px" *ngIf="filter === 'udomljen' || filter === 'kastriran'">
+          <mat-select (selectionChange)="updateFiltersOnRadioChange($event, filter)">
+            <mat-option value="true">Da</mat-option>
+            <mat-option value="false">Ne</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <button mat-raised-button color="accent" (click)="applyFilters()" style="margin-left: 3px;" [disabled]="!dataLoaded">Primijeni filtere</button>
+        <button mat-raised-button color="accent" (click)="clearFilters()" style="margin-left: 3px;" [disabled]="!dataLoaded">Očisti filtere</button>
+      </mat-expansion-panel>
+    </mat-accordion>
+
+    <mat-table [dataSource]="data" class="mat-elevation-z8">
+
+      <!--- Note that these columns can be defined in any order.
+            The actual rendered columns are set as a property on the row definition" -->
+
+      <ng-container matColumnDef="ime">
+        <mat-header-cell *matHeaderCellDef>
+          Ime
+          <mat-form-field>
+            <input matInput (keyup)="updateFilters($event, 'ime')">
+          </mat-form-field>
+        </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <span class="mobile-label">Ime:</span>
+          {{element.ime}}
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="opispsa">
+        <mat-header-cell *matHeaderCellDef>
+          Opis psa
+          <mat-form-field>
+            <input matInput (keyup)="updateFilters($event, 'opispsa')">
+          </mat-form-field>
+        </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <span class="mobile-label">Opis:</span>
+          {{element.opisPsa}}
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="udom">
+        <mat-header-cell *matHeaderCellDef>
+          Udomljen
+          <mat-form-field>
+            <input matInput (keyup)="updateFilters($event, 'udom')">
+          </mat-form-field>
+        </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <span class="mobile-label">Udomljen:</span>
+          <span *ngIf="element.udomljen"><mat-icon aria-hidden="false" style="color: greenyellow">check_circle_outline</mat-icon></span>
+          <span *ngIf="!element.udomljen"><mat-icon aria-hidden="false" style="color: orangered">highlight_off</mat-icon></span>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="udomitelj">
+        <mat-header-cell *matHeaderCellDef>
+          Udomitelj
+          <mat-form-field>
+            <input matInput (keyup)="updateFilters($event, 'udomitelj')">
+          </mat-form-field>
+        </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <span class="mobile-label">Udomitelj:</span>
+          {{element.udomitelj}}
+        </mat-cell>
+      </ng-container>
+
+
+      <ng-container matColumnDef="kastr">
+        <mat-header-cell *matHeaderCellDef>
+          Kastriran
+          <mat-form-field>
+            <input matInput (keyup)="updateFilters($event, 'kastr')">
+          </mat-form-field>
+        </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <span class="mobile-label">Kastriran:</span>
+          <span *ngIf="element.kastriran"><mat-icon aria-hidden="false" style="color: greenyellow">check_circle_outline</mat-icon></span>
+          <span *ngIf="!element.kastriran"><mat-icon aria-hidden="false" style="color: orangered">highlight_off</mat-icon></span>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+      <mat-row
+        *matRowDef="let row; columns: displayedColumns;"
+        (click)="onRowSelected(row)"
+        [ngClass]="{'highlight': selectedRowIndex == row.rn}">
+      </mat-row>
+    </mat-table>
+
+    <div *ngIf="!dataLoaded"
+         style="z-index: 2; position: absolute; top: 50%; left: 50%;">
+      <mat-progress-spinner
+        color="primary"
+        mode="indeterminate">
+      </mat-progress-spinner>
+    </div>
+
+  </mat-card-content>
+
+  <mat-card-actions>
+
+    <button mat-raised-button color="primary" (click)="loadMoreData()" [disabled]="!dataLoaded">Učitaj još</button>
+
+  </mat-card-actions>
+</mat-card>
+

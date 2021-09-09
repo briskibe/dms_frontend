@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "dog-management-system": {
+      "hosting": {
+        "dms-frontend": [
+          "dog-management-system"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "dog-management-system"
+  }
+}
