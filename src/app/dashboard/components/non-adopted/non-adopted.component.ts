@@ -4,7 +4,7 @@ import {MatDialog} from "@angular/material/dialog";
 import {MediaMatcher} from "@angular/cdk/layout";
 import {DetailsComponent} from "../details/details.component";
 import {EvidentionCastrationModel} from "../../model/evidentionCastration.model";
-import {MatSelectChange} from "@angular/material/select";
+import {MatSelect, MatSelectChange} from "@angular/material/select";
 
 @Component({
   selector: 'app-non-adopted',
@@ -20,6 +20,7 @@ export class NonAdoptedComponent implements OnInit {
   selectedRowIndex = -1;
 
   @ViewChild("filterValue") filterValue: ElementRef;
+  @ViewChild("filterValue2") filterValue2: MatSelect;
 
   mobileQuery: MediaQueryList;
 
@@ -113,7 +114,13 @@ export class NonAdoptedComponent implements OnInit {
   }
 
   clearFilters() {
-    this.filterValue.nativeElement.value = "";
+    if (this.filterValue && this.filterValue.nativeElement) {
+      this.filterValue.nativeElement.value = "";
+    }
+
+    if (this.filterValue2 && this.filterValue2.value) {
+      this.filterValue2.value = null;
+    }
     this.filters.clear();
     this.applyFilters();
   }

@@ -12,7 +12,7 @@
           <mat-label>Filter</mat-label>
           <select matNativeControl [(ngModel)]="filter">
             <option value="ime">Ime</option>
-            <option value="opispsa">Opis</option>
+            <option value="opisPsa">Opis</option>
             <option value="udomljen">Udomljen</option>
             <option value="udomitelj">Udomitelj</option>
             <option value="kastriran">Kastriran</option>
@@ -24,7 +24,7 @@
         </mat-form-field>
 
         <mat-form-field appearance="fill" style="margin-left: 2px" *ngIf="filter === 'udomljen' || filter === 'kastriran'">
-          <mat-select (selectionChange)="updateFiltersOnRadioChange($event, filter)">
+          <mat-select matNativeControl #filterValue2 (selectionChange)="updateFiltersOnRadioChange($event, filter)">
             <mat-option value="true">Da</mat-option>
             <mat-option value="false">Ne</mat-option>
           </mat-select>

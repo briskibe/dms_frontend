@@ -5,7 +5,7 @@ import {MatDialog} from "@angular/material/dialog";
 import {DetailsComponent} from "../details/details.component";
 import {MediaMatcher} from "@angular/cdk/layout";
 import {EvidentionModel} from "../../model/evidention.model";
-import {MatSelectChange} from "@angular/material/select";
+import {MatSelect, MatSelectChange} from "@angular/material/select";
 
 @Component({
   selector: 'app-evidention',
@@ -20,6 +20,7 @@ export class EvidentionComponent implements OnInit {
   filters: Map<string, string> = new Map<string, string>();
   selectedRowIndex = -1;
   @ViewChild("filterValue") filterValue: ElementRef;
+  @ViewChild("filterValue2") filterValue2: MatSelect;
 
   filter: string = 'ime';
 
@@ -145,7 +146,13 @@ export class EvidentionComponent implements OnInit {
   }
 
   clearFilters() {
-    this.filterValue.nativeElement.value = "";
+    if (this.filterValue && this.filterValue.nativeElement) {
+      this.filterValue.nativeElement.value = "";
+    }
+
+    if (this.filterValue2 && this.filterValue2.value) {
+      this.filterValue2.value = null;
+    }
     this.filters.clear();
     this.applyFilters();
   }
