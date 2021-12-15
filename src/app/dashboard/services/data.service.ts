@@ -62,6 +62,10 @@ export class DataService {
     return this.http.post<Data>(this.endpointPath + '/save', data);
   }
 
+  public deleteData(id: number) {
+    return this.http.delete<void>(this.endpointPath + `/delete/${id}`);
+  }
+
   public getInterventions(active: string): Observable<Intervention[]> {
     return this.http.get<Intervention[]>(this.endpointPath + `/interventions/${active}`);
   }
