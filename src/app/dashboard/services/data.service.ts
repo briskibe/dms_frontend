@@ -70,7 +70,7 @@ export class DataService {
     return this.http.get<Intervention[]>(this.endpointPath + `/interventions/${active}`);
   }
 
-  public fetchNearbyData(locality: string, id: number, showAll: String): Observable<Location[]> {
+  public fetchNearbyData(locality: string = 'okolica', id: number, showAll: String): Observable<Location[]> {
     return this.http.get<Location[]>(this.endpointPath + `/nearbyLocations/${id}/${locality}/${showAll}`);
   }
 

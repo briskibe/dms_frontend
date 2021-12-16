@@ -69,6 +69,8 @@ export class InterventionEditComponent implements OnInit {
   fetchNearbyLocations(locality: string, id: number) {
     this.nearbyData = null;
     this.dataLoaded = false;
+    if (locality == '')
+      locality = 'okolica';
     this.dataService.fetchNearbyData(locality, id, this.showAll ? "all" : "active").subscribe(res2 => {
       this.dataLoaded = true;
       this.nearbyData = res2;
