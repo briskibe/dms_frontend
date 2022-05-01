@@ -16,7 +16,6 @@
             <mat-option value="udomljen">Udomljen</mat-option>
             <mat-option value="udomitelj">Udomitelj</mat-option>
             <mat-option value="mjestoUdomljenja">Mjesto udomljenja</mat-option>
-            <mat-option value="uginuo">Uginuo</mat-option>
           </mat-select>
         </mat-form-field>
 
@@ -89,17 +88,6 @@
         <mat-cell *matCellDef="let element">
           <span class="mobile-label">Adresa:</span>
           {{element.mjestoUdomljenja}}
-        </mat-cell>
-      </ng-container>
-
-      <ng-container matColumnDef="ugin">
-        <mat-header-cell *matHeaderCellDef>
-          Uginuo
-        </mat-header-cell>
-        <mat-cell *matCellDef="let element">
-          <span class="mobile-label">Uginuo:</span>
-          <span *ngIf="element.uginuo"><mat-icon aria-hidden="false" style="color: orangered">check_circle_outline</mat-icon></span>
-          <span *ngIf="!element.uginuo"><mat-icon aria-hidden="false" style="color: greenyellow">highlight_off</mat-icon></span>
         </mat-cell>
       </ng-container>
 
