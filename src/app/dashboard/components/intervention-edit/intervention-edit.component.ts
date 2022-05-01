@@ -36,6 +36,9 @@ export class InterventionEditComponent implements OnInit {
   public nearbyData: Location[];
   public dataLoaded: boolean = false;
   public showAll: false;
+  public castrated: string = 'all';
+  public yearOfAdoption: string = 'all';
+  public yearOfCheck: string = 'all';
   public dogsForIntervention: string[] = [];
   public dogIdsForIntervention: number[] = [];
 
@@ -71,7 +74,7 @@ export class InterventionEditComponent implements OnInit {
     this.dataLoaded = false;
     if (locality == '')
       locality = 'okolica';
-    this.dataService.fetchNearbyData(locality, id, this.showAll ? "all" : "active").subscribe(res2 => {
+    this.dataService.fetchNearbyData(locality, id, this.showAll ? "all" : "active", this.castrated, this.yearOfAdoption, this.yearOfCheck).subscribe(res2 => {
       this.dataLoaded = true;
       this.nearbyData = res2;
     })

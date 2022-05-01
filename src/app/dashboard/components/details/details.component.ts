@@ -94,13 +94,13 @@ export class DetailsComponent implements OnInit {
   onDeleteClick() {
     if(confirm("Želiš li obrisati psa: "+this.data.data.ime + "?")) {
       this.dialogRef.close();
-      /*this.dataService.deleteData(this.data.data.id).subscribe(
+      this.dataService.deleteData(this.data.data.id).subscribe(
         res => {
           this._snackbar.open("Podatak uspješno obrisan", "OK", { duration: 2000 });
           this.dialogRef.close();
         },
         err => this._snackbar.open("Došlo je do greške prilikom brisanja podatka", "OK", { duration: 2000 })
-      );*/
+      );
     }
   }
 }

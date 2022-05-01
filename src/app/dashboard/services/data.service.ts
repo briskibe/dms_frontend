@@ -70,8 +70,13 @@ export class DataService {
     return this.http.get<Intervention[]>(this.endpointPath + `/interventions/${active}`);
   }
 
-  public fetchNearbyData(locality: string = 'okolica', id: number, showAll: String): Observable<Location[]> {
-    return this.http.get<Location[]>(this.endpointPath + `/nearbyLocations/${id}/${locality}/${showAll}`);
+  public fetchNearbyData(locality: string = 'okolica', id: number, showAll: String, castrated: string = 'all', yearOfAdoption: string = 'all', yearOfCheck: string = 'all'): Observable<Location[]> {
+    let params = new HttpParams()
+      .set('castrated', castrated)
+      .set('yearOfAdoption', yearOfAdoption)
+      .set('yearOfCheck', yearOfCheck)
+
+    return this.http.get<Location[]>(this.endpointPath + `/nearbyLocations/${id}/${locality}/${showAll}`, { params: params });
   }
 
   public saveIntervention(intervention: Intervention, dogIds: number[]) {

@@ -139,6 +139,13 @@
   </p>
 
   <p>
+    <mat-form-field appearance="standard">
+      <mat-label>Datum provjere</mat-label>
+      <input matInput [(ngModel)]="data.data.datumProvjere" [disabled]="true">
+    </mat-form-field>
+  </p>
+
+  <p>
       <mat-form-field appearance="fill">
         <mat-label>Datum provjere</mat-label>
         <input matInput [matDatepicker]="picker2" [(ngModel)]="data.data.datumProvjere" [disabled]="!data.isNew  && !isEdit">
