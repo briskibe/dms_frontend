@@ -15,7 +15,7 @@ import {MatSelect, MatSelectChange} from "@angular/material/select";
 export class EvidentionComponent implements OnInit {
 
   data: EvidentionModel[];
-  displayedColumns: string[] = ['ime', 'opispsa', 'udom', 'udomitelj', 'mjestoudom', 'ugin'];
+  displayedColumns: string[] = ['ime', 'opispsa', 'udom', 'udomitelj', 'mjestoudom'];
   lastDocumentLoaded: number = 1;
   filters: Map<string, string> = new Map<string, string>();
   selectedRowIndex = -1;
